@@ -192,7 +192,7 @@ curl "https://your.domain/api/session?admin_token=<JWT_TOKEN>"
 ```
 
 ### DELETE /api/mailboxes
-删除指定邮箱
+删除指定邮箱（即“清空邮箱”：删除邮箱本身及其邮件）
 
 **参数：**
 | 参数 | 类型 | 说明 |
@@ -304,6 +304,35 @@ curl "https://your.domain/api/session?admin_token=<JWT_TOKEN>"
   "total": 2,
   "results": [
     { "address": "test1@example.com", "success": true, "updated": true }
+  ]
+}
+```
+
+### POST /api/mailboxes/batch-delete
+批量删除邮箱（即批量“清空邮箱”，删除邮箱本身及其邮件，仅 strictAdmin）
+
+**请求参数：**
+```json
+{
+  "addresses": ["test1@example.com", "test2@example.com"]
+}
+```
+
+**限制：**
+- `addresses` 必须为非空数组
+- 单次最多 100 个地址
+- 地址会按 `trim().toLowerCase()` 规范化
+
+**返回：**
+```json
+{
+  "success": true,
+  "success_count": 1,
+  "fail_count": 1,
+  "total": 2,
+  "results": [
+    { "address": "test1@example.com", "success": true, "deleted": true },
+    { "address": "test2@example.com", "success": false, "error": "邮箱不存在" }
   ]
 }
 ```

@@ -118,7 +118,7 @@ export function renderListItem(m) {
         <button class="btn ${m.is_favorite ? 'active' : ''}" data-action="favorite" title="${m.is_favorite ? '取消收藏' : '收藏'}">${m.is_favorite ? '⭐' : '☆'}</button>
         <button class="btn" data-action="login" title="${m.can_login ? '禁止登录' : '允许登录'}">${m.can_login ? '🔐' : '🔓'}</button>
         <button class="btn" data-action="password" title="${m.password_is_default ? '设置密码' : '重置密码'}">🔑</button>
-        <button class="btn" data-action="delete" title="删除">🗑️</button>
+        <button class="btn" data-action="delete" title="清空邮箱（删除邮箱）">🗑️</button>
       </div>
     </div>`;
 }

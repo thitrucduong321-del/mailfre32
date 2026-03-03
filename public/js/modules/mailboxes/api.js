@@ -119,6 +119,19 @@ export async function batchToggleLogin(addresses, canLogin) {
 }
 
 /**
+ * 批量删除邮箱
+ * @param {Array<string>} addresses - 邮箱地址列表
+ * @returns {Promise<Response>}
+ */
+export async function batchDeleteMailboxes(addresses) {
+  return api('/api/mailboxes/batch-delete', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ addresses })
+  });
+}
+
+/**
  * 设置转发
  * @param {number} mailboxId - 邮箱 ID
  * @param {string} forwardTo - 转发目标
@@ -155,6 +168,7 @@ export default {
   changePassword,
   toggleLogin,
   batchToggleLogin,
+  batchDeleteMailboxes,
   setForward,
   setFavorite
 };
